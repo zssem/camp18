@@ -1,5 +1,7 @@
 package com.zuehlke.movieticketservice.movie;
 
+import com.zuehlke.movieticketservice.movie.movieservice.MovieServiceAdapter;
+import com.zuehlke.movieticketservice.movie.rating.RatingAdapter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +14,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping("/api/v1/")
 @Controller
 public class MovieController {
+
+    private final MovieServiceAdapter movieServiceAdapter;
+    private final RatingAdapter ratingAdapter;
+
+    public MovieController(MovieServiceAdapter movieServiceAdapter, RatingAdapter ratingAdapter) {
+        this.movieServiceAdapter = movieServiceAdapter;
+        this.ratingAdapter = ratingAdapter;
+    }
+
 
     @RequestMapping(value = "/movies", method = GET)
     @ResponseBody
