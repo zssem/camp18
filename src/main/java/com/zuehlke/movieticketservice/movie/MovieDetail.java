@@ -2,6 +2,7 @@ package com.zuehlke.movieticketservice.movie;
 
 import com.zuehlke.movieticketservice.movie.movieservice.MovieServiceResponse;
 
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -14,7 +15,7 @@ public class MovieDetail {
     private final String plot;
     private final int year;
     private final String genre;
-    private final List<Rating> ratings;
+    private List<Rating> ratings;
 
     MovieDetail(long id, String title, String poster, String plot, int year, String genre, List<Rating> ratings) {
         this.id = id;
@@ -23,7 +24,7 @@ public class MovieDetail {
         this.plot = plot;
         this.year = year;
         this.genre = genre;
-        this.ratings = ratings;
+        this.ratings = ratings == null ? Collections.emptyList() : ratings;
     }
 
     public long getId() {
@@ -57,5 +58,10 @@ public class MovieDetail {
     public static MovieDetail from(MovieServiceResponse movie) {
         return new MovieDetail(movie.getId(), movie.getTitle(), movie.getPoster(),
                 movie.getPlot(), movie.getYear(), movie.getGenre(), emptyList());
+    }
+
+    public MovieDetail setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+        return this;
     }
 }
