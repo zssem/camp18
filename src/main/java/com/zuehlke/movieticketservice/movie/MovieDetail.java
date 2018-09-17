@@ -1,6 +1,10 @@
 package com.zuehlke.movieticketservice.movie;
 
+import com.zuehlke.movieticketservice.movie.movieservice.MovieServiceResponse;
+
 import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 @SuppressWarnings("unused")
 public class MovieDetail {
@@ -48,5 +52,10 @@ public class MovieDetail {
 
     public List<Rating> getRatings() {
         return ratings;
+    }
+
+    public static MovieDetail from(MovieServiceResponse movie) {
+        return new MovieDetail(movie.getId(), movie.getTitle(), movie.getPoster(),
+                movie.getPlot(), movie.getYear(), movie.getGenre(), emptyList());
     }
 }
